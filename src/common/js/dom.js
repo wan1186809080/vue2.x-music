@@ -21,3 +21,30 @@ export function getData(el, name, val) { // set 给dom的'data-'属性添加值 
     return el.getAttribute(name)
   }
 }
+
+let elementStyle = document.createElement('div').style
+let vendor = (() => {
+  let transformNames = {
+    webkit: 'webkitTransform',
+    Moz: 'mozTransform',
+    O: 'OTransform',
+    ms: 'msTransform',
+    standard: 'transform'
+  }
+  for (let k in transformNames) {
+    if (elementStyle[transformNames[k]] !== undefined) {
+      return k
+    }
+  }
+  return false
+})()
+// console.log(vendor)
+export function prefixStyle(style) { // css前缀添加
+  if (vendor === false) {
+    return false
+  }
+  if (vendor === 'standard') {
+    return style
+  }
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
+}

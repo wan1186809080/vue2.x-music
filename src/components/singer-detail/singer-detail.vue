@@ -8,7 +8,7 @@
 import { mapGetters } from 'vuex'
 import { getSingerDetail } from 'api/singer'
 import { ERR_OK } from 'api/config'
-import { createSong } from 'common/js/song'
+import { createSong, isValidMusic, processSongsUrl } from 'common/js/song'
 import MusicList from 'components/music-list/music-list'
 export default {
   data() {
@@ -36,19 +36,20 @@ export default {
         this.$router.push('/singer')
         return
       }
-      getSingerDetail(this.singer.id).then(res => {
-        // console.log(res)
+      getSingerDetail(this.singer.id).then((res) => {
         if (res.code === ERR_OK) {
-          this.songs = this._normalizeSongs(res.data.list)
-          console.log(this.songs)
+          processSongsUrl(this._normalizeSongs(res.data.list)).then((songs) => {
+            this.songs = songs
+            // console.log(songs)
+          })
         }
       })
     },
-    _normalizeSongs(list) { // 对付费歌曲做处理，过滤掉付费歌曲
+    _normalizeSongs (list) { // 对付费歌曲做过滤处理
       let ret = []
-      list.forEach(item => {
+      list.forEach((item) => {
         let { musicData } = item
-        if (musicData.songid && musicData.albummid) {
+        if (isValidMusic(musicData)) {
           ret.push(createSong(musicData))
         }
       })

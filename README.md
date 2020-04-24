@@ -67,3 +67,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 2020.4.22
 
 - song-list基础组件
+- 封装js dom prefix方法简化dom样式兼容操作
+- music-list组件交互效果
+
+2020.4.24
+
+- 播放器player的vuex状态设置
+- player播放器组件样式
+- 播放器组件展开收起动画
+- 使用create-keyframe-animation第三方库，实现cd飞入播放器动画
