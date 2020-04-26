@@ -76,3 +76,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - player播放器组件样式
 - 播放器组件展开收起动画
 - 使用create-keyframe-animation第三方库，实现cd飞入播放器动画
+
+2020.4.26
+
+- player组件添加audio操作音乐
+- 播放时cd转动动画**（播放器切换时旋转角度重置问题未处理）**
+- 播放器进度条基础组件progress-bar
