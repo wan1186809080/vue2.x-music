@@ -78,6 +78,9 @@ export default {
       // console.log('我在一直摸', anchorIndex, delta)
       this._scrollTo(anchorIndex, 200)
     },
+    refresh() {
+      this.$refs.listview.refresh()
+    },
     scroll(pos) {
       this.scrollY = pos.y
     },

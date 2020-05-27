@@ -82,3 +82,15 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - player组件添加audio操作音乐
 - 播放时cd转动动画**（播放器切换时旋转角度重置问题未处理）**
 - 播放器进度条基础组件progress-bar
+
+2020.4.27
+
+- 播放器进度条触摸进度条功能
+- 播放器progress-circle 圆形进度条组件实现 
+- 播放器播放顺序实现
+- 歌曲歌词接口抓捕和转码
+
+2020.4.28
+
+- 歌词滚动
+- 唱片歌词所有滑动交互

@@ -6,7 +6,7 @@
     <h1 class="title" v-html="title"></h1>
     <div ref="bgImage" class="bg-image" :style="bgStyle">
       <div class="play-wrapper">
-        <div ref="playBtn" class="play" v-show="songs.length>0">
+        <div ref="playBtn" class="play" v-show="songs.length>0" @click="random">
           <i class="icon-play"></i>
           <span class="text">随机播放全部</span>
         </div>
@@ -31,10 +31,13 @@ import SongList from 'base/song-list/song-list'
 import { prefixStyle } from 'common/js/dom'
 import Loading from 'base/loading/loading'
 import { mapActions } from 'vuex'
+import { playListMixin } from 'common/js/mixin'
+
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
 const backdrop = prefixStyle('backdropFilter') // 谷歌浏览器调试时webkit内核，但是只有backdropFilter属性，导致无法显示毛玻璃效果
 export default {
+  mixins: [playListMixin],
   props: {
     bgImage: {
       type: String,
@@ -62,8 +65,14 @@ export default {
     }
   },
   methods: {
+    handlePlayList(playList) {
+      const bottom = playList.length > 0 ? '60px' : ''
+      this.$refs.list.$el.style.bottom = bottom
+      this.$refs.list.refresh()
+    },
     ...mapActions([
-      'selectPlay'
+      'selectPlay',
+      'randomPlay'
     ]),
     scroll(pos) {
       this.scrollY = pos.y
@@ -75,6 +84,11 @@ export default {
       this.selectPlay({
         list: this.songs,
         index
+      })
+    },
+    random() {
+      this.randomPlay({
+        list: this.songs
       })
     }
   },
